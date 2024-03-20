@@ -1,0 +1,12 @@
+{
+    "recommendations": [
+        "tamasfe.even-better-toml",
+        "streetsidesoftware.code-spell-checker",
+        "ms-python.isort",
+        "ms-python.python",
+        "ms-python.mypy-type-checker",
+        "ms-python.black-formatter",
+        "ms-python.pylint",
+        "ms-python.isort"
+]
+}

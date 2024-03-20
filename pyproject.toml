@@ -1,0 +1,141 @@
+[tool.poetry]
+name = "resgenie"
+version = "0.1.0"
+description = "interifter's resume experiment"
+authors = ["interifter <zachary@interift.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pydantic = { extras = ["email"], version = "^2.6.4" }
+yarl = "^1.9.4"
+pyyaml = "^6.0.1"
+loguru = "^0.7.2"
+marko = "^2.0.3"
+typer = "^0.9.0"
+types-pyyaml = "^6.0.12.20240311"
+markdown = "^3.6"
+pyhtml2pdf = "^0.0.7"
+
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^3.6.2"
+black = "^24.2.0"
+pylint = "^3.1.0"
+isort = "^5.13.2"
+mypy = "^1.9.0"
+bandit = { extras = ["toml"], version = "^1.7.8" }
+ipython = "^8.22.2"
+
+[tool.poetry.group.test.dependencies]
+pytest-asyncio = "^0.23.5.post1"
+pytest = "^8.1.1"
+pytest-xdist = "^3.5.0"
+tox = "^4.14.1"
+
+[[tool.poetry.source]]
+name = "PyPI"
+priority = "primary"
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = ["tests/unit"]
+addopts = [
+    # "--cov=resgenie",
+    # "--cov-fail-under=100",
+    # "--cov-report=html",
+]
+
+[tool.tox]
+# See ./tox.ini
+
+[tool.black]
+target-version = ["py310"]
+line-length = 140
+
+[tool.isort]
+py_version = "310"
+src_paths = ["resgenie", "tests"]
+profile = "black"
+line_length = 140
+lines_after_imports = 2
+lines_before_imports = 2
+multi_line_output = 3
+include_trailing_commas = true
+
+[tool.mypy]
+python_version = "3.10"
+files = ["resgenie", "tests"]
+warn_return_any = true
+warn_unused_configs = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+disallow_untyped_calls = true
+disallow_untyped_defs = true
+strict_optional = true
+plugins = ["pydantic.mypy"]
+
+[tool.bandit]
+exclude_dirs = ["tests"]
+
+[tool.pylint.main]
+py-version = "3.10"
+extension-pkg-allow-list = ["pydantic"]
+fail-under = 10.0
+jobs = 1
+persistent = true
+limit-inference-results = 100
+suggestion-mode = true
+
+[tool.pylint.basic]
+argument-naming-style = "snake_case"
+attr-naming-style = "snake_case"
+bad-names = ["asdf"]
+class-attribute-naming-style = "any"
+class-const-naming-style = "UPPER_CASE"
+class-naming-style = "PascalCase"
+const-naming-style = "UPPER_CASE"
+docstring-min-length = 10
+function-naming-style = "snake_case"
+good-names = ["_"]
+inlinevar-naming-style = "any"
+method-naming-style = "snake_case"
+module-naming-style = "snake_case"
+variable-naming-style = "snake_case"
+
+[tool.pylint.design]
+max-args = 7
+max-attributes = 10
+max-bool-expr = 5
+max-branches = 10
+max-locals = 15
+max-parents = 5
+max-public-methods = 20
+max-returns = 6
+max-statements = 50
+min-public-methods = 2
+
+[tool.pylint.format]
+indent-after-paren = 4
+indent-string = "    "
+max-line-length = 140
+max-module-lines = 1000
+
+[tool.pylint.reports]
+score = true
+
+[tool.pylint.similarities]
+ignore-comments = true
+ignore-docstrings = true
+ignore-imports = true
+ignore-signatures = true
+min-similarity-lines = 4
+spelling-ignore-comment-directives = "fmt: on,fmt: off,noqa:,noqa,nosec,isort:skip,mypy:"
+
+[tool.pylint.typecheck]
+ignore-none = true
+ignore-on-opaque-inference = true
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

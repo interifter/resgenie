@@ -1,0 +1,49 @@
+default_language_version:
+  python: python3.10
+fail_fast: false
+
+repos:
+- repo: local
+  hooks:
+  - id: update-hooks
+    name: update-hooks
+    entry: poetry run pre-commit autoupdate
+- repo: https://github.com/python-poetry/poetry
+  rev: 1.8.0
+  hooks:
+  - id: poetry-check
+  - id: poetry-lock
+- repo: https://github.com/pycqa/isort
+  rev: 5.13.2
+  hooks:
+  - id: isort
+- repo: https://github.com/psg/black
+  rev: 24.2.0
+  hooks:
+  - id: black
+    langauge_version: python3.10
+- repo: local
+  hooks:
+  - id: mypy
+    name: mypy
+    entry: poetry run mypy
+    language: system
+    types:
+    - python
+    require_serial: true
+  - id: pylint
+    name: pylint
+    entry: poetry run pylint
+    args: ["-j", "0", "--fail-under=10"]
+    language: system
+    types:
+    - python
+  - id: bandit
+    name: bandit
+    entry: poetry run bandit
+    args: ["--configfile", "pyproject.toml", "--recursive", "resgenie"]
+    language: system
+    pass_filenames: false
+  - id: unit-tests
+    name: pytest-unit-tests
+    entry: poetry run

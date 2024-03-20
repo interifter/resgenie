@@ -1,0 +1,62 @@
+contact:
+  address:
+    city: Eureka
+    state: OR
+  email: jack@eureka.com
+  phone: 555-555-5555
+  name: Jack Carter
+summary: Small town Sheriff based out of Southern Oregon looking to find a job with a bit of a slower pace. I'm a little exhausted
+  dealing with the likes of alternate universes, giant lasers, and time travel. Would appreciate being able to drink my coffee and 
+  not worry about it taking me to 1945.
+education:
+- degree: Sheriff Degree
+  end: June 2015
+  gpa: 4.0
+  institution: Sheriff's Academy of Sheriffs
+  location: Bakersfield, CA
+  minor: null
+  active: false
+  specialty: De-escalation
+- degree: Deputy Degree
+  end: June 2012
+  gpa: 1.9
+  institution: Ds get Degrees University
+  location: Tampa Bay, FL
+  minor: Beer Pong
+  specialty: null
+experience:
+- institution: Eureka Sheriff's Office
+  focus: Staying Alive
+  title: Sheriff
+  start: July 2006
+  end: null
+  highlights:
+  - Survived a nuclear apocalypse
+  - Lasted six years before being cancelled
+  - Enjoyed the occasional cup of coffee
+  location: Eureka, OR
+  summary: You know what I did. You just don't want to look up what I did.
+- location: Columbus, OH
+  institution: Columbus Sharif
+  company: Columbus Sheriff
+  domain: County
+  start: December 2000
+  end: December 2005
+  title: Sheriff's Deputy
+  highlights:
+  - Got fired for being absolutely too handsome for anyone. They 
+    are just really jealous of me
+  summary: I didn't do much after the incident...
+skills:
+  Competent:
+    rank: 1
+    entries:
+    - coffee
+  Skilled:
+    rank: 2
+    entries:
+    - guns
+  Capable:
+    rank: 3
+    entries:
+    - talking
