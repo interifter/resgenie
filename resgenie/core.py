@@ -1,11 +1,13 @@
 """Core pydantic models for the transformations. Assumes US-based values"""
 
 from __future__ import annotations
-from pathlib import Path
+
 import re
-from typing import TypeVar
-from pydantic import BaseModel, EmailStr, field_validator
+from pathlib import Path
+from typing import Annotated, TypeVar
+
 import yaml
+from pydantic import BaseModel, EmailStr, Field, field_validator
 
 Model = TypeVar("Model", bound="YamlModel")
 
@@ -88,6 +90,67 @@ class ResumeSkillGroup(BaseModel):
     entries: list[str]
 
 
+class ResumeWyeAxisDataPoint(BaseModel):
+    """A data point in the yAxis entry"""
+
+    value: float
+    display: str = ""
+
+
+class ResumeWyeAxisEntry(BaseModel):
+    """A y-axis entry"""
+
+    y_value: Annotated[str | int, Field(alias="yValue")]
+    data: dict[str, ResumeWyeAxisDataPoint]
+
+    def keys(self) -> list[str]:
+        """Returns the list of keys, ordered in discovered order"""
+        return list(self.data.keys())
+
+    def keys_display_names(self) -> dict[str, str]:
+        """Get the key mapping for its display"""
+        return {x: (x if not y.display else y.display) for x, y in self.data.items()}
+
+
+class ResumeChartEntry(BaseModel):
+    """A Chart Entry"""
+
+    title: str
+    points: list[ResumeWyeAxisEntry]
+
+    def keys(self) -> list[str]:
+        """Returns the list of keys, ordered in discovered order"""
+        keys: list[str] = []
+        for point in self.points:
+            for key in point.keys():
+                if key in keys:
+                    continue
+                keys.append(key)
+        return keys
+
+    def key_x_values(self) -> dict[str, list[float]]:
+        """Return a dictionary of the key value pairs"""
+        data: dict[str, list[float]] = {x: [] for x in self.keys()}
+        for point in self.points:
+            for key in data.keys():
+                entry = point.data.get(key, None)
+                if entry:
+                    data[key].append(entry.value)
+                else:
+                    data[key].append(0.0)
+        return data
+
+    def keys_display_names(self) -> dict[str, str]:
+        """Get the key mapping for its display"""
+        keys: dict[str, str] = {}
+        for point in self.points:
+            for key, value in point.keys_display_names().items():
+                if key in keys:
+                    continue
+                keys[key] = value
+        return keys
+
+
 class Resume(YamlModel):
     """A Resume model"""
 
@@ -96,6 +159,7 @@ class Resume(YamlModel):
     education: list[ResumeEducationEntry]
     experience: list[ResumeExperienceEntry]
     skills: dict[str, ResumeSkillGroup]
+    charts: list[ResumeChartEntry] | None = None
 
     @field_validator("skills", mode="before")
     @classmethod

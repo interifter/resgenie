@@ -60,3 +60,131 @@ skills:
     rank: 3
     entries:
     - talking
+charts:
+- title: Primary Programming Languages
+  points:
+  - yValue: 2013
+    data:
+      perl:
+        value: 25.0
+      objective-c:
+        value: 25.0
+      c-sharp:
+        display: C#
+        value: 25.0
+      java: 
+        value: 25.0
+  - yValue: 2014
+    data:
+      perl:
+        value: 50.0
+      objective-c:
+        value: 50.0
+  - yValue: 2015
+    data:
+      windows-batch:
+        value: 50.0
+      powershell:
+        value: 25.0
+      cpp:
+        display: C++
+        value: 10.0
+      c-sharp:
+        display: C#
+        value: 15.0
+  - yValue: 2016
+    data:
+      windows-batch:
+        value: 40.0
+      powershell:
+        value: 25.0
+      c-sharp:
+        display: C#
+        value: 25.0
+      cpp:
+        display: C++
+        value: 10.0
+  - yValue: 2017
+    data:
+      c-sharp:
+        display: C#
+        value: 75.0 
+      simics:
+        value: 25.0
+  - yValue: 2018
+    data:
+      c-sharp:
+        display: C#
+        value: 25.0 
+      msbuild:
+        value: 50.0
+      python:
+        value: 25.0
+  - yValue: 2019
+    data:
+      msbuild:
+        value: 33.0
+      python:
+        value: 33.0
+      groovy:
+        display: Jenkins Groovy
+        value: 33.1
+  - yValue: 2020
+    data:
+      msbuild:
+        value: 25.0
+      python:
+        value: 50.0
+      groovy:
+        display: Jenkins Groovy
+        value: 25.0
+  - yValue: 2021
+    data:
+      python:
+        value: 50.0
+      groovy:
+        display: Jenkins Groovy
+        value: 25.0
+      cmake:
+        value: 25.0
+  - yValue: 2022
+    data:
+      python:
+        value: 50.0
+      groovy:
+        display: Jenkins Groovy
+        value: 10.0
+      cmake:
+        value: 15.0
+      gha:
+        display: GitHub Actions
+        value: 25.0
+  - yValue: 2023
+    data:
+      c-sharp:
+        display: C#
+        value: 25.0
+      python:
+        value: 25.0
+      cpp:
+        display: C++
+        value: 25.0
+      groovy:
+        display: Jenkins Groovy
+        value: 5.0
+      cmake:
+        value: 5.0
+      gha:
+        display: GitHub Actions
+        value: 5.0
+      docker:
+        value: 10.0
+  - yValue: 2024
+    data:
+      python:
+        value: 60.0
+      gha:
+        display: GitHub Actions
+        value: 30.0
+      docker:
+        value: 10.0

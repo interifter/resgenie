@@ -1,7 +1,8 @@
 """Unit tests for resgenie/core.py"""
 
 import pytest
-from resgenie.core import ResumeContact, Resume
+
+from resgenie.core import Resume, ResumeContact
 from tests.resources import HAPPY_PATH_YML_RESUME
 
 
@@ -48,3 +49,34 @@ def test_resume_skills_ranks() -> None:
     with pytest.raises(ValueError) as exc_info:
         Resume.verify_ranks(buckets)  # type: ignore[call-arg]
     assert "Found: rank duplicates={1: ['spam', 'dosa']" in exc_info.value.args[0]
+
+
+def test_resume_chart() -> None:
+    """Test to ensure the chart is loading info correctly"""
+    resume = HAPPY_PATH_YML_RESUME
+    model = Resume.from_file(resume)
+    assert model.charts
+    chart_keys = model.charts[0].keys()
+    expected_keys = [
+        "perl",
+        "objective-c",
+        "c-sharp",
+        "java",
+        "windows-batch",
+        "powershell",
+        "cpp",
+        "simics",
+        "msbuild",
+        "python",
+        "groovy",
+        "cmake",
+        "gha",
+        "docker",
+    ]
+    assert chart_keys == expected_keys
+
+    dictionary = model.charts[0].key_x_values()
+    assert all(key in dictionary for key in expected_keys)
+
+    display_names = model.charts[0].keys_display_names()
+    assert all(key in display_names for key in expected_keys)
